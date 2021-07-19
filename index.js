@@ -73,8 +73,7 @@ function inning(){
     return Math.round(Math.random() + Math.random())       
 }
 
-// console.log(inning())
-// inning();
+console.log(inning())
 
 /* ⚾️⚾️⚾️ Task 3: finalScore() ⚾️⚾️⚾️
 Use the finalScore function below to do the following:
@@ -90,12 +89,12 @@ Use the finalScore function below to do the following:
 }
 */ 
 
-function finalScore(inningCB, num2){
+function finalScore(inningCB, num1){
   const currScore = {
     Home: inningCB(),
     Away: inningCB(),
   }
-  for (let i = 1; i <= num2; i++){
+  for (let i = 1; i <= num1; i++){
     currScore.Home += inningCB()
     currScore.Away += inningCB()
   }
@@ -124,23 +123,31 @@ Use the getInningScore() function below to do the following:
 
   // similar to our total game function we just did
 
-function getInningScore(inningcb, finalScorecb) {
-  const totalGameScore = [];
-  let homeScore = 0;
-  let awayScore = 0;
-
-  for(let i = 0; i < 9; i++){
-    const currentScore = finalScorecb(inningcb);
-    homeScore = homeScore + currentScore.Home;
-    awayScore = awayScore + currentScore.Away;
-    totalGameScore.push(`Inning ${i + 1} Home ${homeScore} Away ${awayScore}`)
+function getInningScore(inningCB) {
+  const currScore = {
+    Home: inningCB(),
+    Away: inningCB(),
   }
-  return totalGameScore;
+  return currScore;
 }
 
-// console.log(getInningScore())
+
+console.log(getInningScore(inning))
 
 
+// console.log(getInningScore(inning)
+
+  // const totalGameScore = [];
+  // let homeScore = 0;
+  // let awayScore = 0;
+
+  // for(let i = 0; i < 9; i++){
+  //   const currentScore = inningcb;
+  //   homeScore = homeScore + currentScore.Home;
+  //   awayScore = awayScore + currentScore.Away;
+  //   totalGameScore.push(`Inning ${i + 1} Home ${homeScore} Away ${awayScore}`)
+  // }
+  // return totalGameScore;
 
 
 /* ⚾️⚾️⚾️ Task 5: scoreboard() ⚾️⚾️⚾️
