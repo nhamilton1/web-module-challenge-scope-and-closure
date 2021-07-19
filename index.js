@@ -29,11 +29,11 @@ console.log(processFirstItem(['foo','bar'],function(str){return str+str}));
   
   1. What is the difference between counter1 and counter2?
 
-    I think counter 1 is hoisted, counter 2 is not hoisted
+    counter 1 uses a closer and counter 2 does not use a closure
   
   2. Which of the two uses a closure? How can you tell?
 
-    Counter1 uses closure, because is reaching out 
+    Counter1 uses closure, because is reaching out into the outer function
   
   3. In what scenario would the counter1 code be preferable? In what scenario would 
      counter2 be better? 
@@ -51,6 +51,7 @@ function counterMaker() {
 }
 
 const counter1 = counterMaker();
+console.log('task1a counter1', counter1());
 
 // counter2 code
 let count = 0;
@@ -58,6 +59,8 @@ let count = 0;
 function counter2() {
   return count++;
 }
+
+console.log('task1b counter2', counter2());
 
 
 /* ⚾️⚾️⚾️ Task 2: inning() ⚾️⚾️⚾️
@@ -70,10 +73,11 @@ NOTE: This will be a callback function for the tasks below
 */
 
 function inning(){
-    return Math.round(Math.random() + Math.random())       
+    return Math.round(Math.random() + Math.random())     
+    // return Math.floor(Math.random() * Math.floor(3));  
 }
 
-console.log(inning())
+console.log('task 2',inning())
 
 /* ⚾️⚾️⚾️ Task 3: finalScore() ⚾️⚾️⚾️
 Use the finalScore function below to do the following:
@@ -90,7 +94,7 @@ Use the finalScore function below to do the following:
 */ 
 
 function finalScore(inningCB, num1){
-  const currScore = {
+  let currScore = {
     Home: inningCB(),
     Away: inningCB(),
   }
@@ -103,7 +107,7 @@ return currScore
 
 
 
-console.log(finalScore(inning, 9));
+console.log('task 3', finalScore(inning, 9));
 
 
 // for (let i = 0; i < num2; i++){
@@ -123,6 +127,8 @@ Use the getInningScore() function below to do the following:
 
   // similar to our total game function we just did
 
+
+  // param of inningCB
 function getInningScore(inningCB) {
   const currScore = {
     Home: inningCB(),
@@ -132,7 +138,7 @@ function getInningScore(inningCB) {
 }
 
 
-console.log(getInningScore(inning))
+console.log('task 4',getInningScore(inning))
 
 
 // console.log(getInningScore(inning)
@@ -191,10 +197,36 @@ Use the scoreboard function below to do the following:
 ]  
   */
 
-function scoreboard(/* CODE HERE */) {
-  /* CODE HERE */
+function scoreboard(getInningScoreCB, inningCB, inningNum) {
+  // decclare an array that we can push our results to
+  const totalGameScore = []
+  // make a variable for homeScore and awayScore and set them to 0, use let bec you want to update them
+  let homeScore = 0;
+  let awayScore = 0;
+  //for loop (let i = 0; i < inningNum; i++)
+  for (let i = 0; i < inningNum; i++){
+  // inside the loop, create a variable for the home + away object from the gettingInningCB(inningcb)
+  //update your variables of home and away for each inning and push them to the array
+  const currentScore = getInningScoreCB(inningCB);
+  homeScore = homeScore + currentScore.Home;
+  awayScore = awayScore + currentScore.Away;
+  totalGameScore.push(`Inning ${i + 1}: Away ${homeScore} - Home ${awayScore}`);
+  } if (awayScore === homeScore){
+    totalGameScore.push(`This game will require extra innings: Away ${homeScore} - Home ${awayScore}`)
+  } else {
+    totalGameScore.push(`Final Score Away ${homeScore} - Home ${awayScore}`)
+  }
+  return totalGameScore;
+  //outside of the loop
+  //if awayScore === homeScore 
+  //  that 'this game will require extra innings
+  // else
+  // push final score
+
+  //return array
 }
 
+console.log(scoreboard(getInningScore, inning, 9))
 
 
 
