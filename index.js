@@ -32,7 +32,10 @@ console.log(processFirstItem(['foo','bar'],function(str){return str+str}));
   2. Which of the two uses a closure? How can you tell?
   
   3. In what scenario would the counter1 code be preferable? In what scenario would 
-     counter2 be better?  
+     counter2 be better? 
+
+     You would want to use counter1 code if you would want to keep 'let count' inside of its function and not go outside of it. You would use
+     counter2 if you would want to have the let count outside of the function and to be able to access it anywhere
 */
 
 // counter1 code
@@ -66,8 +69,8 @@ function inning(){
     return Math.round(Math.random() + Math.random())       
 }
 
-console.log(inning())
-inning();
+// console.log(inning())
+// inning();
 
 /* ⚾️⚾️⚾️ Task 3: finalScore() ⚾️⚾️⚾️
 Use the finalScore function below to do the following:
@@ -83,28 +86,35 @@ Use the finalScore function below to do the following:
 }
 */ 
 
-function finalScore(inning, num2){
-  let home = 0;
-  let away = 0;
-  inning();
+function finalScore(inningCB, num2){
+  for (let i = 0; i < num2; i++){
+    return {
+      Home: inningCB(),
+      Away: inningCB(),
+      // console.log(num2);
+    }
+  }
 }
 
-
-finalScore(inning, 9)
-
+console.log(finalScore(inning, 9));
 
 
 
-//   for(let i = 1; i <= num2; i++){
-//     if(Math.random() === 1){
-//       home++
-//     }else{
-//     if(Math.random() === 0){
-//       away++
-//     }
-//   }
-//   return finalScore();
+// const totalScore = [];
+// let Home = 0
+// let Away = 0;
+
+// for (let i = 0; i < num2; i++){
+//   const currentScore = gamecb(inningCB);
+//   Home = Home + currentScore.Home
+//   Away = Away + currentScore.Away
+//   totalScore.push( `Inning ${i + 1}: Away: ${currentScore.Away} - Home: ${currentScore.Home}`);
 // }
+// return totalScore;
+// }
+
+// console.log(finalScore(inning, 9))
+
 
 
 
@@ -116,6 +126,7 @@ Use the getInningScore() function below to do the following:
 function getInningScore(/*Your Code Here */) {
   /*Your Code Here */
 }
+
 
 
 /* ⚾️⚾️⚾️ Task 5: scoreboard() ⚾️⚾️⚾️
